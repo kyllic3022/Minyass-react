@@ -13,4 +13,9 @@ Foundations (Milestone 1) in progress.
 
 ## Setup
 
-Coming soon.
+Install dependencies and run the Android app:
+
+```bash
+npm install
+npm run android
+```
