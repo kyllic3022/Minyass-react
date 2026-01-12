@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Darlen-ls UX Design Directions</title>
+<style>
+:root {
+  --void: #0B0B0F;
+  --deep-night: #0A1023;
+  --shadow-purple: #2A1238;
+  --bordo: #4B0F1B;
+  --ember: #7A1C2B;
+  --star-blue: #2E3B6F;
+  --starlight: #E8E6F0;
+  --glow: rgba(122, 28, 43, 0.35);
+  --card: rgba(15, 16, 24, 0.72);
+  --card-stroke: rgba(232, 230, 240, 0.08);
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: "Space Grotesk", "Satoshi", system-ui, sans-serif;
+  background: radial-gradient(1200px 700px at 20% -10%, #1C2450 0%, var(--void) 40%),
+              radial-gradient(1000px 900px at 80% 10%, #2A1238 0%, var(--void) 45%),
+              var(--void);
+  color: var(--starlight);
+}
+.header {
+  padding: 28px 36px 10px;
+}
+.header h1 {
+  font-family: "Cinzel", "Cormorant Garamond", serif;
+  font-size: 28px;
+  letter-spacing: 1px;
+  margin: 0 0 6px;
+}
+.header p { margin: 0; opacity: 0.7; }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 18px;
+  padding: 18px 24px 40px;
+}
+.mockup {
+  position: relative;
+  border-radius: 18px;
+  background: linear-gradient(160deg, rgba(10, 16, 35, 0.8), rgba(10, 16, 35, 0.4));
+  border: 1px solid var(--card-stroke);
+  overflow: hidden;
+  min-height: 520px;
+  box-shadow: 0 18px 50px rgba(0,0,0,0.45);
+}
+.mockup .title {
+  padding: 16px 18px 10px;
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+.canvas {
+  position: relative;
+  height: 480px;
+  padding: 18px;
+}
+.ambient {
+  position: absolute;
+  inset: -30% 0 0;
+  background: radial-gradient(300px 280px at 20% 10%, rgba(46, 59, 111, 0.45), transparent 70%),
+              radial-gradient(260px 260px at 80% 20%, rgba(122, 28, 43, 0.35), transparent 65%),
+              radial-gradient(500px 400px at 50% 90%, rgba(42, 18, 56, 0.5), transparent 70%);
+  filter: blur(8px);
+  opacity: 0.8;
+  animation: drift 12s ease-in-out infinite alternate;
+}
+@keyframes drift { from { transform: translateY(-8px); } to { transform: translateY(12px); } }
+.heart {
+  position: absolute;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  left: 50%;
+  top: 55%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle at 40% 35%, #9C2A3C, var(--bordo) 45%, #250910 70%);
+  box-shadow: 0 0 26px var(--glow), 0 0 60px rgba(122, 28, 43, 0.3);
+  animation: pulse 2.2s ease-in-out infinite;
+}
+.heart:after {
+  content: "";
+  position: absolute;
+  inset: -18px;
+  border-radius: 50%;
+  border: 1px solid rgba(232, 230, 240, 0.12);
+  animation: ripple 2.2s ease-in-out infinite;
+}
+@keyframes pulse { 0% { transform: translate(-50%, -50%) scale(0.98); } 50% { transform: translate(-50%, -50%) scale(1.05); } 100% { transform: translate(-50%, -50%) scale(0.98); } }
+@keyframes ripple { 0% { opacity: 0.2; transform: scale(0.9); } 70% { opacity: 0.05; transform: scale(1.15); } 100% { opacity: 0; transform: scale(1.25); } }
+.panel {
+  position: absolute;
+  border-radius: 14px;
+  background: var(--card);
+  border: 1px solid var(--card-stroke);
+  padding: 12px 12px;
+  backdrop-filter: blur(6px);
+}
+.panel h4 { margin: 0 0 6px; font-size: 12px; opacity: 0.7; }
+.panel p { margin: 0; font-size: 12px; opacity: 0.8; }
+.badge {
+  display: inline-flex;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: rgba(46, 59, 111, 0.5);
+  font-size: 10px;
+  letter-spacing: 0.4px;
+}
+.note {
+  position: absolute;
+  width: 150px;
+  height: 130px;
+  background: linear-gradient(180deg, #F0E5C8, #D8C7A6);
+  color: #2A1B12;
+  border-radius: 8px 8px 16px 8px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.35);
+  padding: 10px;
+  font-family: "Satoshi", "Space Grotesk", sans-serif;
+}
+.note:before {
+  content: "";
+  position: absolute;
+  right: 10px;
+  top: -8px;
+  width: 36px;
+  height: 16px;
+  background: rgba(120, 122, 130, 0.3);
+  border-radius: 4px;
+}
+.nav { position: absolute; bottom: 16px; left: 18px; right: 18px; display: flex; gap: 8px; }
+.nav .pill { flex: 1; padding: 10px; text-align: center; border-radius: 999px; background: rgba(232,230,240,0.08); font-size: 11px; }
+.small-grid { display: grid; gap: 8px; }
+.small-grid .chip { padding: 6px 8px; border-radius: 10px; background: rgba(232,230,240,0.07); font-size: 11px; }
+
+/* Variations */
+.dir-1 .panel { top: 40px; left: 16px; width: 160px; }
+.dir-1 .panel.right { top: 40px; right: 16px; width: 130px; }
+.dir-1 .note { right: 16px; bottom: 90px; transform: rotate(2deg); }
+
+.dir-2 .heart { top: 45%; }
+.dir-2 .panel { bottom: 120px; left: 20px; width: 200px; }
+.dir-2 .panel.right { top: 50px; right: 18px; width: 120px; }
+.dir-2 .note { left: 18px; top: 70px; transform: rotate(-3deg); }
+
+.dir-3 .heart { width: 120px; height: 120px; left: 65%; top: 50%; }
+.dir-3 .panel { top: 60px; left: 18px; width: 180px; }
+.dir-3 .panel.right { bottom: 120px; left: 18px; width: 180px; }
+.dir-3 .note { right: 18px; top: 80px; transform: rotate(4deg); }
+
+.dir-4 .heart { width: 110px; height: 110px; top: 40%; }
+.dir-4 .panel { bottom: 80px; left: 20px; width: 230px; }
+.dir-4 .panel.right { top: 70px; right: 20px; width: 140px; }
+.dir-4 .note { right: 26px; bottom: 120px; transform: rotate(-4deg); }
+
+.dir-5 .heart { width: 150px; height: 150px; top: 55%; }
+.dir-5 .panel { top: 70px; left: 20px; width: 200px; }
+.dir-5 .panel.right { top: 210px; right: 20px; width: 150px; }
+.dir-5 .note { left: 26px; bottom: 110px; transform: rotate(1deg); }
+
+.dir-6 .heart { width: 130px; height: 130px; top: 48%; }
+.dir-6 .panel { top: 45px; right: 20px; width: 160px; }
+.dir-6 .panel.right { bottom: 130px; left: 20px; width: 200px; }
+.dir-6 .note { right: 28px; bottom: 110px; transform: rotate(-2deg); }
+
+.dir-7 .heart { width: 120px; height: 120px; top: 50%; }
+.dir-7 .panel { top: 50px; left: 20px; width: 210px; }
+.dir-7 .panel.right { top: 160px; left: 20px; width: 210px; }
+.dir-7 .note { right: 18px; top: 70px; transform: rotate(3deg); }
+
+.dir-8 .heart { width: 140px; height: 140px; top: 55%; }
+.dir-8 .panel { bottom: 130px; right: 20px; width: 170px; }
+.dir-8 .panel.right { top: 70px; left: 20px; width: 150px; }
+.dir-8 .note { left: 18px; bottom: 90px; transform: rotate(-1deg); }
+</style>
+</head>
+<body>
+  <div class="header">
+    <h1>Darlen-ls ? Design Directions</h1>
+    <p>Cosmic, gothic, intimate UI directions with pulsing heartbeat core and tactile sticky-note memory.</p>
+  </div>
+
+  <div class="grid">
+    <section class="mockup dir-1">
+      <div class="title">01. Orbit Core</div>
+      <div class="canvas">
+        <div class="ambient"></div>
+        <div class="heart"></div>
+        <div class="panel"><h4>Status</h4><p>Quiet. Present.</p><span class="badge">Connected</span></div>
+        <div class="panel right"><h4>Mood</h4><p>Soft light</p></div>
+        <div class="note">Remember: breathe with me.</div>
+        <div class="nav"><div class="pill">Heartbeat</div><div class="pill">Check-in</div><div class="pill">Notes</div></div>
+      </div>
+    </section>
+
+    <section class="mockup dir-2">
+      <div class="title">02. Split Nebula</div>
+      <div class="canvas">
+        <div class="ambient"></div>
+        <div class="heart"></div>
+        <div class="panel"><h4>Today</h4><p>2 heartbeats</p></div>
+        <div class="panel right"><h4>Quick</h4><div class="small-grid"><div class="chip">Send pulse</div><div class="chip">Need reassurance</div></div></div>
+        <div class="note">What helped: silent presence</div>
+        <div class="nav"><div class="pill">Home</div><div class="pill">BPD</div><div class="pill">Locket</div></div>
+      </div>
+    </section>
+
+    <section class="mockup dir-3">
+      <div class="title">03. Side Horizon</div>
+      <div class="canvas">
+        <div class="ambient"></div>
+        <div class="heart"></div>
+        <div class="panel"><h4>Partner</h4><p>Heartbeat 5s ago</p></div>
+        <div class="panel right"><h4>Respond</h4><p>Tap to send back</p></div>
+        <div class="note">You are safe here.</div>
+        <div class="nav"><div class="pill">Pulse</div><div class="pill">Mood</div><div class="pill">Settings</div></div>
+      </div>
+    </section>
+
+    <section class="mockup dir-4">
+      <div class="title">04. Ritual Lane</div>
+      <div class="canvas">
+        <div class="ambient"></div>
+        <div class="heart"></div>
+        <div class="panel"><h4>Check-in</h4><p>Select triggers</p></div>
+        <div class="panel right"><h4>Need</h4><p>Reassurance</p></div>
+        <div class="note">Write what helped</div>
+        <div class="nav"><div class="pill">Heartbeat</div><div class="pill">Check-in</div><div class="pill">Meds</div></div>
+      </div>
+    </section>
+
+    <section class="mockup dir-5">
+      <div class="title">05. Locket Focus</div>
+      <div class="canvas">
+        <div class="ambient"></div>
+        <div class="heart"></div>
+        <div class="panel"><h4>Photo Locket</h4><p>Tap to open</p></div>
+        <div class="panel right"><h4>Counter</h4><p>1023 days</p></div>
+        <div class="note">Movie night at 9.</div>
+        <div class="nav"><div class="pill">Locket</div><div class="pill">Pulse</div><div class="pill">Notes</div></div>
+      </div>
+    </section>
+
+    <section class="mockup dir-6">
+      <div class="title">06. Quiet Stream</div>
+      <div class="canvas">
+        <div class="ambient"></div>
+        <div class="heart"></div>
+        <div class="panel"><h4>Memory</h4><p>Shared note</p></div>
+        <div class="panel right"><h4>Health</h4><p>Notifications OK</p></div>
+        <div class="note">Smell your sweatshirt.</div>
+        <div class="nav"><div class="pill">Home</div><div class="pill">Notes</div><div class="pill">Health</div></div>
+      </div>
+    </section>
+
+    <section class="mockup dir-7">
+      <div class="title">07. Dual Panel</div>
+      <div class="canvas">
+        <div class="ambient"></div>
+        <div class="heart"></div>
+        <div class="panel"><h4>Triggers</h4><p>Overthinking</p></div>
+        <div class="panel right"><h4>Need</h4><p>Deep breathe</p></div>
+        <div class="note">Save as option</div>
+        <div class="nav"><div class="pill">BPD</div><div class="pill">Pulse</div><div class="pill">Locket</div></div>
+      </div>
+    </section>
+
+    <section class="mockup dir-8">
+      <div class="title">08. Anchor Core</div>
+      <div class="canvas">
+        <div class="ambient"></div>
+        <div class="heart"></div>
+        <div class="panel"><h4>Mood</h4><p>Stable</p></div>
+        <div class="panel right"><h4>Respond</h4><p>Send back</p></div>
+        <div class="note">We are here.</div>
+        <div class="nav"><div class="pill">Pulse</div><div class="pill">Mood</div><div class="pill">Meds</div></div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

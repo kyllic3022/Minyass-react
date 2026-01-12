@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Darlen-ls UI Preview</title>
+<style>
+:root {
+  --void: #0B0B0F;
+  --deep-night: #0A1023;
+  --shadow-purple: #2A1238;
+  --bordo: #4B0F1B;
+  --ember: #7A1C2B;
+  --star-blue: #2E3B6F;
+  --starlight: #E8E6F0;
+  --card: rgba(15, 16, 24, 0.78);
+  --card-stroke: rgba(232, 230, 240, 0.08);
+  --glow: rgba(122, 28, 43, 0.35);
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: "Space Grotesk", "Satoshi", system-ui, sans-serif;
+  color: var(--starlight);
+  background:
+    radial-gradient(900px 540px at 10% -10%, #1C2450 0%, var(--void) 40%),
+    radial-gradient(900px 700px at 90% 0%, #2A1238 0%, var(--void) 45%),
+    var(--void);
+}
+header {
+  padding: 22px 26px 10px;
+}
+header h1 {
+  font-family: "Cinzel", "Cormorant Garamond", serif;
+  font-size: 26px;
+  margin: 0 0 6px;
+  letter-spacing: 1px;
+}
+header p { margin: 0; opacity: 0.7; }
+.preview {
+  display: grid;
+  place-items: center;
+  padding: 16px 20px 40px;
+}
+.device {
+  width: 360px;
+  height: 760px;
+  border-radius: 32px;
+  border: 1px solid rgba(232,230,240,0.12);
+  box-shadow: 0 40px 80px rgba(0,0,0,0.55);
+  background: linear-gradient(160deg, rgba(10, 16, 35, 0.9), rgba(10, 16, 35, 0.6));
+  position: relative;
+  overflow: hidden;
+}
+.ambient {
+  position: absolute;
+  inset: -40% 0 0;
+  background:
+    radial-gradient(260px 240px at 18% 12%, rgba(46, 59, 111, 0.45), transparent 70%),
+    radial-gradient(240px 240px at 80% 20%, rgba(122, 28, 43, 0.35), transparent 65%),
+    radial-gradient(520px 420px at 50% 92%, rgba(42, 18, 56, 0.55), transparent 70%);
+  filter: blur(10px);
+  animation: drift 12s ease-in-out infinite alternate;
+}
+@keyframes drift { from { transform: translateY(-10px); } to { transform: translateY(12px); } }
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px 8px;
+  font-size: 12px;
+  opacity: 0.75;
+  position: relative;
+  z-index: 3;
+}
+
+.heart {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  left: 50%;
+  top: 52%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle at 40% 35%, #9C2A3C, var(--bordo) 45%, #250910 70%);
+  box-shadow: 0 0 28px var(--glow), 0 0 70px rgba(122, 28, 43, 0.3);
+  animation: pulse 2.2s ease-in-out infinite;
+  z-index: 2;
+}
+.heart:after {
+  content: "";
+  position: absolute;
+  inset: -20px;
+  border-radius: 50%;
+  border: 1px solid rgba(232, 230, 240, 0.12);
+  animation: ripple 2.2s ease-in-out infinite;
+}
+@keyframes pulse { 0% { transform: translate(-50%, -50%) scale(0.98); } 50% { transform: translate(-50%, -50%) scale(1.06); } 100% { transform: translate(-50%, -50%) scale(0.98); } }
+@keyframes ripple { 0% { opacity: 0.2; transform: scale(0.9); } 70% { opacity: 0.05; transform: scale(1.15); } 100% { opacity: 0; transform: scale(1.25); } }
+
+.panel {
+  position: absolute;
+  border-radius: 14px;
+  background: var(--card);
+  border: 1px solid var(--card-stroke);
+  padding: 12px 12px;
+  backdrop-filter: blur(6px);
+  z-index: 3;
+}
+.panel h4 { margin: 0 0 6px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px; opacity: 0.6; }
+.panel p { margin: 0; font-size: 12px; opacity: 0.9; }
+.badge { display: inline-flex; padding: 4px 8px; border-radius: 999px; background: rgba(46, 59, 111, 0.5); font-size: 10px; margin-top: 6px; }
+
+.panel.left { top: 90px; left: 18px; width: 150px; }
+.panel.right { top: 90px; right: 18px; width: 140px; }
+.panel.bottom { bottom: 130px; left: 18px; width: 200px; }
+
+.note {
+  position: absolute;
+  width: 160px;
+  height: 135px;
+  right: 16px;
+  bottom: 150px;
+  background: linear-gradient(180deg, #F0E5C8, #D8C7A6);
+  color: #2A1B12;
+  border-radius: 8px 8px 16px 8px;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.35);
+  padding: 10px;
+  font-size: 12px;
+  z-index: 4;
+  transform: rotate(2deg);
+}
+.note:before {
+  content: "";
+  position: absolute;
+  right: 12px;
+  top: -8px;
+  width: 34px;
+  height: 16px;
+  background: rgba(120, 122, 130, 0.3);
+  border-radius: 4px;
+}
+
+.nav {
+  position: absolute;
+  bottom: 18px;
+  left: 18px;
+  right: 18px;
+  display: flex;
+  gap: 8px;
+  z-index: 4;
+}
+.nav .pill {
+  flex: 1;
+  padding: 10px 6px;
+  text-align: center;
+  border-radius: 999px;
+  background: rgba(232,230,240,0.08);
+  font-size: 11px;
+}
+
+.legend {
+  max-width: 520px;
+  margin: 18px auto 0;
+  font-size: 12px;
+  opacity: 0.7;
+  text-align: center;
+}
+</style>
+</head>
+<body>
+  <header>
+    <h1>Darlen-ls UI Preview</h1>
+    <p>Cosmic gothic home screen with orbit panels, sticky note, and pulsing heart.</p>
+  </header>
+
+  <section class="preview">
+    <div class="device">
+      <div class="ambient"></div>
+      <div class="topbar">
+        <div>Illy</div>
+        <div>Connected</div>
+      </div>
+      <div class="heart"></div>
+      <div class="panel left">
+        <h4>Status</h4>
+        <p>Quiet. Present.</p>
+        <span class="badge">Heartbeat ready</span>
+      </div>
+      <div class="panel right">
+        <h4>Mood</h4>
+        <p>Soft light</p>
+      </div>
+      <div class="panel bottom">
+        <h4>Check-in</h4>
+        <p>Need reassurance</p>
+      </div>
+      <div class="note">Remember: breathe with me.</div>
+      <div class="nav">
+        <div class="pill">Pulse</div>
+        <div class="pill">Check-in</div>
+        <div class="pill">Locket</div>
+      </div>
+    </div>
+    <div class="legend">Tip: open this file in your browser for a full animated preview.</div>
+  </section>
+</body>
+</html>
