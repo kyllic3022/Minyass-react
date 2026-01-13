@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "640674981434",
+    "project_id": "minyass2",
+    "storage_bucket": "minyass2.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:640674981434:android:f5a0b0afb0d257b0b1f703",
+        "android_client_info": {
+          "package_name": "com.minyass"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXBUmjLZBPS_szIIfzJRMmMclIh-RohpA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
