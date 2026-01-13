@@ -3,6 +3,7 @@ import React from 'react';
 import { colors } from '../theme/tokens';
 import CheckInScreen from '../screens/CheckInScreen';
 import HomeScreen from '../screens/HomeScreen';
+import MedsScreen from '../screens/MedsScreen';
 import NotesScreen from '../screens/NotesScreen';
 
 const Tab = createBottomTabNavigator();
@@ -25,6 +26,7 @@ export default function RootNavigator() {
       />
       <Tab.Screen name="CheckIn" component={CheckInScreen} options={{ title: 'Check-in' }} />
       <Tab.Screen name="Notes" component={NotesScreen} options={{ title: 'Notes' }} />
+      <Tab.Screen name="Meds" component={MedsScreen} options={{ title: 'Meds' }} />
     </Tab.Navigator>
   );
 }

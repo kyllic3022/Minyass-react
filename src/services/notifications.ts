@@ -22,3 +22,15 @@ export async function bootstrapNotifications() {
     console.log('FCM token:', token);
   }
 }
+
+export function subscribeToForegroundMessages(onReceive: (data?: Record<string, string>) => void) {
+  return messaging().onMessage(async message => {
+    onReceive(message.data);
+  });
+}
+
+export async function getNotificationStatus() {
+  const permissionGranted = await requestAndroidNotificationPermission();
+  const token = await messaging().getToken();
+  return { permissionGranted, token };
+}
